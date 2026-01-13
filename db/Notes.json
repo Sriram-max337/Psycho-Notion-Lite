@@ -1,0 +1,17 @@
+{
+    "notes": [
+        {
+            "title": "DS-ML Roadmap",
+            "content": "DA -> DV -> Math -> SQL -> ML -> Projects",
+            "tags": [
+                "ML",
+                "DS"
+            ],
+            "created_at": "2026-01-12",
+            "updated_at": "2026-01-13",
+            "extra_notes": "DS and ML",
+            "pinned": false,
+            "archived": false
+        }
+    ]
+}

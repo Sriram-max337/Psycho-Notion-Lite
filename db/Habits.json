@@ -1,0 +1,20 @@
+{
+    "habits": [
+        {
+            "name": "Python Practice",
+            "Created at": "2026-01-11",
+            "logs": {},
+            "log_lst": [],
+            "streak": 0,
+            "Is active": true
+        },
+        {
+            "name": "Study",
+            "Created at": "2026-01-12",
+            "logs": {},
+            "log_lst": [],
+            "streak": 0,
+            "Is active": true
+        }
+    ]
+}
