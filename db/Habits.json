@@ -3,9 +3,13 @@
         {
             "name": "Python Practice",
             "Created at": "2026-01-11",
-            "logs": {},
-            "log_lst": [],
-            "streak": 0,
+            "logs": {
+                "2026-01-14": "done"
+            },
+            "log_lst": [
+                739630
+            ],
+            "streak": 1,
             "Is active": true
         },
         {

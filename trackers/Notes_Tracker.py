@@ -246,7 +246,7 @@ class NotesTracker:
                 note.get("archived",False)
             ])
 
-        with open("Notes_Report.csv", "w", newline="") as f:
+        with open("exports/Notes_Report.csv", "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerow(["name","tags","created_at","updated_at","pinned","archived"])
             writer.writerows(rows)
@@ -304,6 +304,29 @@ class Menu:
             self.menu()
             print("What to do next?")
             print()
+
+def Todays_Notes():
+    print("Pinned and Today's Notes")
+    print("-"*len("Pinned and Today's Notes"))
+    with open("db/Notes.json","r") as f:
+        data = json.load(f)
+    today = date.today().isoformat()
+    found = False
+    for note in data["notes"]:
+        if note["pinned"]==True or note["created_at"] == today or note["updated_at"] == today:
+            found = True
+            print(f"Title : {note["title"]}")
+            print(f"Content : {note["content"]}")
+            print("Tags : ", ", ".join(note["tags"]))
+            print(f"Extra Notes : {note["extra_notes"]}")
+            print(f"Created at : {note["created_at"]}")
+            print(f"Last updated at : {note["updated_at"]}")
+            print(f"Pinned : {"Yes" if note["pinned"] else "No"}")
+
+    if not found:
+        print("No pinned/today's notes")
+    time.sleep(0.5)
+    print()
 
 def run_note_tracker():
     print("Welcome to Notes Tracker")

@@ -166,13 +166,13 @@ class HabitTracker:
                 max(done_dates) if done_dates else ""
             ])
 
-        with open("Habits_Report.csv", "w", newline="") as f:
+        with open("exports/Habits_Report.csv", "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerow(["name", "created_at", "is_active", "total_done_days", "last_done_date"])
             writer.writerows(rows)
 
         print(f"Data exported successfully, saved as 'Habits_Report.csv'")
-                
+    
 
 class Menu:
     def menu(self):
@@ -222,6 +222,25 @@ class Menu:
             print("What to do next?")
             print()
 
+def Todays_Habits():
+        print("Habits done today")
+        print("-"*len("Habits done today"))
+        today = date.today().isoformat()
+        with open("db/Habits.json","r") as f:
+            data = json.load(f)
+        found = False
+        for habit in data["habits"]:
+            if today in habit["logs"] and habit["logs"][today] == "done":
+                found = True
+                for key,value in habit.items():
+                    print(f"{key} : {value}")
+                time.sleep(0.5)
+                print()
+        if not found:
+            print("No habits marked as done today.")
+        time.sleep(0.5)
+        print()
+
 def run_habit_tracker():
     print("Welcome to Habit Tracker")
     time.sleep(0.5)
@@ -231,6 +250,7 @@ def run_habit_tracker():
     Habits = HabitTracker(DB="db/Habits.json")
     menu = Menu()
     menu.Choice(Habits)
+
 
 if __name__=="__main__":
     run_habit_tracker()

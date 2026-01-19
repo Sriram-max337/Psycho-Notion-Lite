@@ -2,6 +2,7 @@ import time
 import os
 import json
 import csv
+from datetime import datetime,date
 
 class ExpenseTracker:
     def __init__(self, DB="db/Expenses.json"):
@@ -147,7 +148,7 @@ class ExpenseTracker:
                 for category,amount in expenses.items():
                     rows.append([date,category,amount])
 
-            with open("Whole_expenses_data.csv","w",newline="") as f:
+            with open("exports/Whole_expenses_data.csv","w",newline="") as f:
                 writer = csv.writer(f)
                 writer.writerow(["date","category","amount"])
                 writer.writerows(rows)
@@ -171,7 +172,7 @@ class ExpenseTracker:
                     for category,amount in self.data["Expenses"][date].items():
                         rows.append([date,category,amount])
 
-                with open(f"Expenses_data_{starting_date}_{ending_date}.csv","w",newline="") as f:
+                with open(f"exports/Expenses_data_{starting_date}_{ending_date}.csv","w",newline="") as f:
                     writer = csv.writer(f)
                     writer.writerow(["date","category","amount"])
                     writer.writerows(rows)
@@ -224,6 +225,25 @@ class Menu:
             print("What to do next?")
             print()
 
+def Todays_Expenses():
+    print("Today's Expenses")
+    print("-"*len("Today's Expenses"))
+    today = date.today().isoformat()
+    with open("db/Expenses.json","r") as f:
+        data = json.load(f)
+    found = False
+    if today in data["Expenses"]:
+        found = True
+        tot_amo = 0
+        for category,amount in data["expenses"][today].items():
+            print(f"{category} : {amount}")
+            tot_amo+=amount
+        print(f"Sum of all expenses of today: {tot_amo}")
+    if not found:
+        print("There are no expenses today")
+    time.sleep(0.5)
+    print()
+
 
 def run_expense_tracker():
     print("Welcome to Expense Tracker")
@@ -234,6 +254,8 @@ def run_expense_tracker():
     Expenses1 = ExpenseTracker(DB="db/Expenses.json")
     menu = Menu()
     menu.Choice(Expenses1)
+
+
 
 if __name__=="__main__":
     run_expense_tracker()
